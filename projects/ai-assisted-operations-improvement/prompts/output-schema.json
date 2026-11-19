@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Triage suggestion",
+  "description": "The only output an AI triage step may return. Anything else is rejected and sent to a person.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["category", "priority", "confidence", "summary", "missing_fields", "rationale"],
+  "properties": {
+    "category": {
+      "enum": ["PROCUREMENT", "TRAVEL_LOGISTICS", "IT_ACCESS", "FINANCE", "HR_CONTRACTS", "REPORTING_DATA", "SAFETY_SECURITY"]
+    },
+    "priority": {"enum": ["P1", "P2", "P3"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "summary": {"type": "string", "maxLength": 300},
+    "missing_fields": {
+      "type": "array",
+      "items": {"enum": ["item", "budget_code", "destination", "dates", "system", "amount", "report", "deadline", "location"]}
+    },
+    "rationale": {"type": "string", "maxLength": 300}
+  }
+}
